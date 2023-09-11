@@ -1,38 +1,154 @@
-.App {
-  text-align: center;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-color: #000;
+  color: white;
+  overflow-x: hidden;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#searchbar{
+  width: 90%;
+  background-color: #111;
+  
 }
+form{
+  background-color: #111;
+}
+.content{
+  width: 100vw;
+  height: 50vh;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+}
+.left,.right{
+  background-color: #111;
+}
+.icons{
+  transform: scale(2.5);
+}
+.body-down{
+  width: 100vw;
+  height: 40vh;
+}
+.left-down,.right-down{
+  background-color: #111;
+}
+.item{
+  width: 16%;
+}
+.slider{
+  width: 20px;
+}
+.sudip2{
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+@media screen and (max-width: 450px) {
+
+  .header{
+    justify-content: space-around;
+  }
+  .header .icon .main-icon{
+    font-size: 15px;
+  }
+ .header form input{
+  display: none;
+ }
+ .header form{
+  background-color: #000;
+ }
+ .header form  label{
+  margin-left: 6rem; 
+ }
+ .header button span{
+  display: none;
+ }
+ .cl-btn{
+  
+ transform: scale(.7);
+ }
+ .content{
+  display: block;
+  width: 100vw;
+ }
+ .left .w-logo{
+  margin-left: 20px;
+ }
+ .content .left{
+  width: 100%;
+  z-index: 1;
+  margin: 0;
+
+ }
+ .content .right{
+  width: 100%;
+  margin-top: 20px;
+ }
+ .air-sun{
+  display: block;
+  
+ }
+ .air{
+  width: 100%;
+ }
+ .air-index{
+  width: 100%;
+  height: 10vh;
+  
+ }
+ .air-index h2{
+  font-size: 15px;
+ }
+ .air-icon{
+  transform: scale(1);
+ }
+ .sun{
+  width: 100%;
+  margin-top: 10px;
+ }
+.sunrise .sunrise-icon , .sunset-icon{
+  transform: scale(1);
+
+}
+.sunrise p,.sunset p {
+  font-size: 15px;
+}
+.others{
+ margin: 0;
+
+}
+.item{
+  width: 41vw;
+}
+.item span{
+  font-size: 12px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.body-down{
+  position: absolute;
+  bottom: -125%;
+  width: 100vw;
+  display:block;
+}
+.forecast{
+  width: 100%;
+  margin: 0;
+}
+.left-down{
+  width: 100%;
+  justify-content: space-between;
+}
+.right-down{
+  display: block;
+  width: 100vw;
+  overflow: hidden;
+}
+.footer{
+  display: flex;
+}
+
+
 }
