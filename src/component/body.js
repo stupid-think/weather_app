@@ -22,13 +22,16 @@ import SearchIcon from '@mui/icons-material/Search';
 const Body = () => {
     const [text, settext] = useState("");
     const [city, setcity] = useState("kolkata");
+    const [datas, setdatas] = useState([]);
 
     useEffect(() => {
         const fetchApi = async () => {
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=bcb20208ca20f30893565a2df8f57874&units=metric`;
             const res = await fetch(url);
-            const data = res.json();
+            const data = await res.json();
             console.log(data);
+            setdatas(data);
+
         };
         fetchApi();
     }, [city]);
@@ -44,6 +47,9 @@ const Body = () => {
         // console.log("on change");
         settext(event.target.value);
     }
+    const date=new Date();
+    const dt=date.toDateString();
+
     return (
         <>
             {/* header section  */}
@@ -67,15 +73,15 @@ const Body = () => {
 
                     <div className="left bg-stone-800 w-1/5  rounded-3xl mx-10 p-7">
                         <h2 className='font-bold '>Now</h2>
-                        <h1 className='text-4xl mt-5 flex justify-between'><span>10.99&deg;<span className='text-4xl'>c </span></span><span className='w-logo'><ThunderstormIcon className=' icons mr-10' /></span></h1>
-                      
-                        <p className='my-4 mt-12 text-2xl font-bold'>Broken cloud</p>
-                        <hr className='mt-12'/>
+                        <h1 className='text-4xl mt-5 flex justify-between'><span>{datas?.main?.temp}&deg;<span className='text-4xl'>c </span></span><span className='w-logo'><ThunderstormIcon className=' icons mr-10' /></span></h1>
 
-                        <p className='mt-3'><CalendarTodayIcon className='' /> wednesday 6 sep</p>
-                        <p className='mt-1.5'><LocationOnIcon /> London, GB</p>
+                        <p className='my-4 mt-12 text-2xl font-bold'> {datas?.weather[0]?.main}</p>
+                        <hr className='mt-12' />
+
+                        <p className='mt-3'><CalendarTodayIcon className='' /> {dt}</p>
+                        <p className='mt-1.5'><LocationOnIcon /> {datas?.name}, {datas?.sys?.country}</p>
                     </div>
-                    
+
 
                     {/* second body section div  */}
 
@@ -116,7 +122,7 @@ const Body = () => {
                                             <WbSunnyIcon className='sunrise-icon scale-150 mr-6' />
                                             <div>
                                                 <p>sunrise</p>
-                                                <p className='text-2xl font-bold'>6:00 AM</p>
+                                                <p className='text-2xl font-bold'>{(datas?.sys?.sunrise)} AM</p>
                                             </div>
                                         </div>
                                     </div>
@@ -140,20 +146,20 @@ const Body = () => {
                             <div className='item bg-black rounded-xl p-5'>
                                 <h2 className='  mb-5'>Humidity</h2>
                                 <div className='mb-5 font-bold'>
-                                    <OpacityIcon className='mr-8 ' /><span>87%</span>
+                                    <OpacityIcon className='mr-8 ' /><span>{datas?.main?.humidity} %</span>
                                 </div>
 
                             </div>
                             <div className='item bg-black rounded-xl  p-5'>
                                 <h2 className='mb-5'>Pressure</h2>
                                 <div className='mb-5 font-bold '>
-                                    <KeyboardDoubleArrowRightIcon className=' mr-8 ' /><span>1013 Pa</span>
+                                    <KeyboardDoubleArrowRightIcon className=' mr-8 ' /><span>{datas?.main?.pressure} Pa</span>
                                 </div>
                             </div>
                             <div className='item bg-black rounded-xl p-5 '>
                                 <h2 className='mb-5'>Wind Speed</h2>
                                 <div className='mb-5 font-bold'>
-                                    <MultipleStopIcon className='mr-8 ' /><span>20 Km/h</span>
+                                    <MultipleStopIcon className='mr-6 ' /><span>{datas?.wind?.speed} Km/h</span>
                                 </div>
                             </div>
                             <div className='item bg-black rounded-xl p-5'>
@@ -165,13 +171,13 @@ const Body = () => {
                             <div className='item bg-black rounded-xl  p-5'>
                                 <h2 className='mb-5'>Visibility</h2>
                                 <div className='mb-5 font-bold'>
-                                    <VisibilityIcon className='mr-8 ' /><span>10 Km</span>
+                                    <VisibilityIcon className='mr-8 ' /><span>{datas?.visibility/1000} Km</span>
                                 </div>
                             </div>
                             <div className='item bg-black rounded-xl  p-5'>
                                 <h2 className='mb-5'>Feels Like</h2>
                                 <div className='mb-5 font-bold'>
-                                    <DeviceThermostatIcon className='mr-8' /><span>4&deg;c</span>
+                                    <DeviceThermostatIcon className='mr-8' /><span>{datas?.main?.feels_like} &deg;c</span>
                                 </div>
                             </div>
                         </div>
@@ -200,10 +206,6 @@ const Body = () => {
                             <Slider className='w-full' />
 
                         </div>
-
-                    </div>
-                    <div className="footer  justify-center h-7 bg-red-700 hidden">
-                        <p>sudip copyright@2023</p>
 
                     </div>
                 </div>
